@@ -1,0 +1,7 @@
+/.idea
+/.vscode
+/.vagrant
+
+/docker/logs
+
+/config/*.env.php

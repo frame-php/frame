@@ -1,0 +1,50 @@
+version: '3.5'
+
+networks:
+  framework:
+    driver: bridge
+
+volumes:
+  frame-mysql:
+    driver: local
+
+services:
+  frame-nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../:/var/www
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs:/var/log/nginx
+    depends_on:
+      - frame-php
+    networks:
+      - framework
+
+  frame-php:
+    build: ./php
+    volumes:
+      - ../:/var/www
+    ports:
+      - "9000:9003"
+    expose:
+      - "9000"
+    depends_on:
+      - frame-mysql
+    networks:
+      - framework
+
+  frame-mysql:
+    image: mysql
+    ports:
+      - "3366:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "framework"
+      MYSQL_USER: "framework"
+      MYSQL_PASSWORD: "framework"
+      MYSQL_DATABASE: "framework"
+    networks:
+      - framework
