@@ -11,24 +11,24 @@ Despite the name Frame (Framework), this set of scripts is not a familiar framew
 
 **THERE'S NOT EVEN A COMPOSITOR HERE**
 
-###Docker
+### Docker
 
-#####Build
+##### Build
 ```shell
 docker-compose build
 ```
 
-#####Up
+##### Up
 ```shell
 docker-compose up -d
 ```
 
-#####Php container
+##### Php container
 ```shell
 docker-compose exec php bash
 ```
 
-#####Down
+##### Down
 ```shell
 docker-compose down
 ```
